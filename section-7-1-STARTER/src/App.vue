@@ -5,8 +5,19 @@
 		<h2 v-else key="secondary">Another hello!</h2>
 	</transition> -->
 
-	<transition name="zoom" type="animation" appear>
+	<!-- <transition name="zoom" type="animation" appear>
 		<h2 v-if="flag">Hello</h2>
+	</transition> -->
+
+	<transition
+		@before-enter="beforeEnter"
+		@enter="enter"
+		@after-enter="afterEnter"
+		@before-leave="beforeLeave"
+		@leave="leave"
+		@after-leave="afterLeave"
+	>
+		<h2 v-if="flag">Hey</h2>
 	</transition>
 </template>
 
@@ -17,6 +28,26 @@ export default {
 		return {
 			flag: true,
 		};
+	},
+	methods: {
+		beforeEnter(el) {
+			console.log("before-enter event was fired", el);
+		},
+		enter(el, done) {
+			done();
+		},
+		afterEnter(el) {
+			console.log("after-enter event was fired", el);
+		},
+		beforeLeave(el) {
+			console.log("before-leave event was fired", el);
+		},
+		leave(el, done) {
+			done();
+		},
+		afterLeave(el) {
+			console.log("after-leave event was fired", el);
+		},
 	},
 };
 </script>
